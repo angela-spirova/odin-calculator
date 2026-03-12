@@ -51,6 +51,10 @@ footer{
 
 }
 
+#upper-display{
+    height:1rem;
+}
+
 
 #current-number-display{
     font-size: 3rem;
