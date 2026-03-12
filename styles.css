@@ -1,0 +1,86 @@
+body{
+    font-family: sans-serif;
+}
+
+footer{
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:100%;
+    height:100px;
+}
+
+#calculator{
+    margin-left:auto;
+    margin-right:auto;
+    border: 3px solid rgb(182, 182, 182);
+    border-bottom-width: 10px;
+    width: 350px;
+    height: 400px;
+    padding: 2rem 1rem;
+
+    background-color: rgb(48, 48, 48);
+
+    border-radius:30px;
+
+    box-shadow: inset -3px -10px 10px 10px rgba(34, 34, 34, 0.473); 
+
+    
+}
+
+#display{
+    background-color: rgb(168, 192, 154);
+    margin-left: auto;
+    margin-right: auto;
+    width:98%;
+    height:100px;
+    margin-bottom:2rem;
+    box-sizing: border-box;
+    border:7px;
+    border-color: rgb(29, 29, 29);
+    border-top-color: rgb(32, 32, 32);
+    border-bottom-color: rgb(73, 73, 73);
+    
+    border-style: solid;
+
+    border-radius: 10px;
+
+    text-align:end;
+    padding:0.5rem;   
+
+}
+
+
+#current-number-display{
+    font-size: 3rem;
+}
+
+
+#buttons{
+    width:100%;
+    height:50%;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap:0.5rem;
+}
+
+button{
+    width:calc((100% - 3rem)/4);
+    height:calc((100% - 1rem)/4);
+    border-radius:10px;
+    background-color: rgb(93, 97, 93);
+    color:white;
+
+    font-size:large;
+    
+
+    user-select: none;
+}
+
+button.other, button.operation{
+    background-color: rgb(67, 71, 67);
+    font-weight: bold;
+
+}
