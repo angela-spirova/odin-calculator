@@ -25,7 +25,13 @@ buttonContainer.addEventListener('click', (event) => {
     }
 
     else if(button.id === 'equals'){
-        currNum = operate(currOperation, prevNum, currNum);
+        let result = operate(currOperation, prevNum, currNum);
+        if(result === undefined){
+            alert('Can\'t divide by zero!');
+            return ;
+            
+        }
+        currNum = result;
         prevNum = null;
         currOperation = null;
     }
@@ -85,7 +91,6 @@ function operate (operation, a, b){
         }
         case "divide": {
             if(b === 0){
-                alert("Can't divide by zero!");
                 return ;
             }
             return divide(a,b);
