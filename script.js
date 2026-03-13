@@ -1,10 +1,29 @@
-let currNum = 0;
+let currNum = null;
 let prevNum = null;
 let currOperation = null;
 
 const currNumDisplay = document.getElementById('curr-num-display');
 const upperDisplay = document.getElementById('upper-display');
 let resultDisplayed = false;
+
+const operations = [
+    {
+        name: 'add',
+        sign: '+',
+    },
+    {
+        name: 'subtract',
+        sign: '-',
+    },
+    {
+        name: 'multiply',
+        sign: '*',
+    },
+    {
+        name: 'divide',
+        sign: '/',
+    }
+]
 
 // MOUSE CONTROLS
 
@@ -64,9 +83,21 @@ document.addEventListener('keydown', (event) => {
     else if(key === 'Backspace'){
         removeDigit();
     }
+    else if(key === 'Delete'){
+        clearEntry();
+    }
+    else if(key === 'Escape'){
+        clearAll();
+    }
+    else if(key === '+' || key === '-' || key === '*' || key === '/'){
+        const operationName = operations.find((operation) => operation.sign === key).name;
+        console.log(operationName);
+        inputOperation(operationName);
+    }
     else if(key === '.'){
 
     }
+
     updateDisplay();
 });
 
@@ -95,18 +126,21 @@ function addDigit(digit){
 }
 
 function inputOperation(operation){
-    currOperation = operation;
+    if(currNum === null){
+        currNum = 0;
+    }
     if(prevNum === null){
         prevNum = currNum;
         currNum = 0;
     }
+    currOperation = operation;
     if(resultDisplayed){
         resultDisplayed = false;
     }
 }
 
 function inputEqualsSign(){
-    let result = operate(currOperation, prevNum, currNum);
+    const result = operate(currOperation, prevNum, currNum);
     if(result === undefined){
         alert('Can\'t divide by zero!');
         return ;
