@@ -126,6 +126,11 @@ function addDigit(digit){
 }
 
 function inputOperation(operation){
+    if(prevNum !== null && currNum !== null){
+        displayResult();
+        prevNum = currNum;
+        currNum = 0;
+    }
     if(currNum === null){
         currNum = 0;
     }
