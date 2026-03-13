@@ -43,7 +43,7 @@ buttonContainer.addEventListener('click', (event) => {
     }
 
     else if(button.id === 'equals'){
-        inputEqualsSign();
+        displayResult();
     }
 
     else if(button.id === 'delete'){
@@ -78,7 +78,7 @@ document.addEventListener('keydown', (event) => {
     }
     else if(key === '=' || key === 'Enter'){
         event.preventDefault();
-        inputEqualsSign();
+        displayResult();
     }
     else if(key === 'Backspace'){
         removeDigit();
@@ -139,7 +139,7 @@ function inputOperation(operation){
     }
 }
 
-function inputEqualsSign(){
+function displayResult(){
     const result = operate(currOperation, prevNum, currNum);
     if(result === undefined){
         alert('Can\'t divide by zero!');
