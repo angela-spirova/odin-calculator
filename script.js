@@ -57,7 +57,8 @@ document.addEventListener('keydown', (event) => {
         const digit = +key;
         addDigit(digit);
     }
-    else if(key === '='){
+    else if(key === '=' || key === 'Enter'){
+        event.preventDefault();
         inputEqualsSign();
     }
     else if(key === 'Backspace'){
