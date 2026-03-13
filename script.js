@@ -2,6 +2,8 @@ let currNum = 0;
 let prevNum = null;
 let currOperation = null;
 
+let resultDisplayed = false;
+
 const currNumDisplay = document.getElementById('curr-num-display');
 const upperDisplay = document.getElementById('upper-display');
 
@@ -12,7 +14,12 @@ buttonContainer.addEventListener('click', (event) => {
 
     if(button.classList.contains('digit')){
         const digit = +button.id;
-        addDigit(digit);
+        if(!resultDisplayed){
+            addDigit(digit);
+        }else{
+            currNum = digit;
+            resultDisplayed = false;
+        }
     }
     
     else if(button.classList.contains('operation')){
@@ -21,6 +28,9 @@ buttonContainer.addEventListener('click', (event) => {
         if(prevNum === null){
             prevNum = currNum;
             currNum = 0;
+        }
+        if(resultDisplayed){
+            resultDisplayed = false;
         }
     }
 
@@ -34,6 +44,8 @@ buttonContainer.addEventListener('click', (event) => {
         currNum = result;
         prevNum = null;
         currOperation = null;
+
+        resultDisplayed = true;
     }
 
     else if(button.id === 'delete'){
