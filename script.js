@@ -74,19 +74,23 @@ buttonContainer.addEventListener('click', (event) => {
 // OPERATIONS
 
 function add(a, b){
-    return a+b;
+    const result = a+b;
+    return Math.round(result*(10**9))/(10**9);
 }
 
 function subtract(a, b){
-    return a-b;
+    const result = a-b;
+    return Math.round(result*(10**9))/(10**9);
 }
 
 function multiply(a, b){
-    return a*b;
+    const result = a*b;
+    return Math.round(result*(10**9))/(10**9);
 }
 
 function divide(a, b){
-    return a/b;
+    const result = a/b;
+    return Math.round(result*(10**9))/(10**9);
 }
 
 
