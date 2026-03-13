@@ -2,10 +2,11 @@ let currNum = 0;
 let prevNum = null;
 let currOperation = null;
 
-let resultDisplayed = false;
-
 const currNumDisplay = document.getElementById('curr-num-display');
 const upperDisplay = document.getElementById('upper-display');
+let resultDisplayed = false;
+
+// MOUSE CONTROLS
 
 const buttonContainer = document.getElementById('buttons');
 
@@ -14,38 +15,16 @@ buttonContainer.addEventListener('click', (event) => {
 
     if(button.classList.contains('digit')){
         const digit = +button.id;
-        if(!resultDisplayed){
-            addDigit(digit);
-        }else{
-            currNum = digit;
-            resultDisplayed = false;
-        }
+        addDigit(digit);
     }
     
     else if(button.classList.contains('operation')){
         const operation = button.id;
-        currOperation = operation;
-        if(prevNum === null){
-            prevNum = currNum;
-            currNum = 0;
-        }
-        if(resultDisplayed){
-            resultDisplayed = false;
-        }
+        inputOperation(operation);
     }
 
     else if(button.id === 'equals'){
-        let result = operate(currOperation, prevNum, currNum);
-        if(result === undefined){
-            alert('Can\'t divide by zero!');
-            return ;
-            
-        }
-        currNum = result;
-        prevNum = null;
-        currOperation = null;
-
-        resultDisplayed = true;
+        inputEqualsSign();
     }
 
     else if(button.id === 'delete'){
@@ -53,16 +32,14 @@ buttonContainer.addEventListener('click', (event) => {
     }
 
     else if(button.id === 'clear'){
-        currNum = 0;
-        prevNum = null;
-        currOperation = null;
+        clearAll();
     }
 
     else if(button.id === 'clear-entry'){
-        currNum = 0;
+        clearEntry();
     }
     else if(button.id === 'sign-toggle'){
-        currNum *= (-1);
+        toggleSign();
     }
     else if(button.id === 'decimal-point'){
         
@@ -70,6 +47,90 @@ buttonContainer.addEventListener('click', (event) => {
 
     updateDisplay();
 });
+
+
+// KEYBOARD CONTROLS
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if(key >= '0' && key <= '9'){
+        const digit = +key;
+        addDigit(digit);
+    }
+    else if(key === '='){
+        inputEqualsSign();
+    }
+    else if(key === 'Backspace'){
+        removeDigit();
+    }
+    else if(key === '.'){
+
+    }
+    updateDisplay();
+});
+
+
+// FUNCTIONALITIES
+
+function removeDigit(){
+    if(currNum >= 0){
+        currNum = Math.floor(currNum/10);
+    }else{
+        currNum = Math.ceil(currNum/10);
+    }
+}
+
+function addDigit(digit){
+    if(resultDisplayed){
+        currNum = digit;
+        resultDisplayed = false;
+    }
+    else
+    if(currNum >= 0){
+        currNum = currNum*10 + digit;
+    }else{
+        currNum = currNum*10 - digit;
+    }
+}
+
+function inputOperation(operation){
+    currOperation = operation;
+    if(prevNum === null){
+        prevNum = currNum;
+        currNum = 0;
+    }
+    if(resultDisplayed){
+        resultDisplayed = false;
+    }
+}
+
+function inputEqualsSign(){
+    let result = operate(currOperation, prevNum, currNum);
+    if(result === undefined){
+        alert('Can\'t divide by zero!');
+        return ;
+    }
+
+    currNum = result;
+    prevNum = null;
+    currOperation = null;
+
+    resultDisplayed = true;
+}
+
+function clearAll(){
+    currNum = 0;
+    prevNum = null;
+    currOperation = null;
+}
+
+function clearEntry(){
+    currNum = 0;
+}
+
+function toggleSign(){
+    currNum *= (-1);
+}
 
 // OPERATIONS
 
@@ -114,24 +175,6 @@ function operate (operation, a, b){
         default:{
             return currNum;
         }
-    }
-}
-
-
-function addDigit(digit){
-    if(currNum >= 0){
-        currNum = currNum*10 + digit;
-    }else{
-        currNum = currNum*10 - digit;
-    }
-   
-}
-
-function removeDigit(){
-    if(currNum >= 0){
-        currNum = Math.floor(currNum/10);
-    }else{
-        currNum = Math.ceil(currNum/10);
     }
 }
 
